@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  tgbot:
+    container_name: tgbot
+    build:
+      context: ./tgbot
+    command: ["--mode", "polling"]
+    env_file:
+      - tgbot/.env
+    networks:
+      - botnet
+    restart: unless-stopped
+
+networks:
+  botnet:

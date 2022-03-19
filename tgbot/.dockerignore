@@ -1,0 +1,28 @@
+# CI/CD
+Makefile
+docker/
+gitlab-ci.yml
+.gitignore
+
+# IDE
+./.idea
+
+# Cache files
+__pycache__/
+
+# Project files
+# игнорировать все файлы markdown (md) кроме всех файлов README*.md, исключая README-secret.md
+*.md
+!README*.md
+README-secret.md
+LICENSE
+*.log
+
+# Environments
+**/*.env
+**/*.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

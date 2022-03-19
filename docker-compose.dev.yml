@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+
+  tgbot:
+    container_name: tgbot
+    image: $TEST_IMAGE
+    command: ["--mode", "webhook"]
+    volumes:
+      - ssl_cert:/opt/app/tgbot/$SSL_DIR:ro
+    env_file:
+      - tgbot/.env
+    ports:
+      - 8443:8443
+    networks:
+      - dev_backend
+    restart: unless-stopped
+
+networks:
+  dev_backend:
+    external:
+      name: admint_backend_dev_backend
+
+volumes:
+  ssl_cert:
+    external:
+      name: admint_backend_ssl_cert

@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: db
+    image: postgres:13.1-alpine
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    networks:
+      - test_net
+    restart: unless-stopped
+
+  tgbot:
+    container_name: tgbot
+    build:
+      context: ./tgbot
+    command: ["--mode", "polling"]
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - TGBOT_TOKEN
+      - ENV_STAGE
+    expose:
+      - 8443
+    networks:
+      - test_net
+    restart: always
+
+networks:
+  test_net:
